@@ -41,6 +41,7 @@ namespace DruidsHikeStore
                 {
                     builder
                     .AllowAnyOrigin()
+                    
                     .AllowAnyHeader()
                     .AllowAnyMethod();
                 });

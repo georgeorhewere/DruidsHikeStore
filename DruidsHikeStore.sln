@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DruidsHikeStore", "DruidsHikeStore.csproj", "{4B66705F-83AA-4251-ACEC-F03E0922C431}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DruidsHikeStore", "DruidsHikeStore.csproj", "{4B66705F-83AA-4251-ACEC-F03E0922C431}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreDB", "..\StoreDB\StoreDB.csproj", "{FD8FCF84-B955-4E88-8EB5-AD83E727C8F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreDB", "StoreDB\StoreDB.csproj", "{CF68E639-F259-4C25-82DE-C7CF26078D0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HikeStoreTests", "..\HikeStoreTests\HikeStoreTests.csproj", "{97A4E9F2-C08C-46DE-AC6F-99CEF24C9265}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreDbTests", "StoreDbTests\StoreDbTests.csproj", "{2EF2C1A0-8721-41C5-B382-FEC4192DE601}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,14 @@ Global
 		{4B66705F-83AA-4251-ACEC-F03E0922C431}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B66705F-83AA-4251-ACEC-F03E0922C431}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B66705F-83AA-4251-ACEC-F03E0922C431}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FD8FCF84-B955-4E88-8EB5-AD83E727C8F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FD8FCF84-B955-4E88-8EB5-AD83E727C8F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FD8FCF84-B955-4E88-8EB5-AD83E727C8F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FD8FCF84-B955-4E88-8EB5-AD83E727C8F1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{97A4E9F2-C08C-46DE-AC6F-99CEF24C9265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{97A4E9F2-C08C-46DE-AC6F-99CEF24C9265}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{97A4E9F2-C08C-46DE-AC6F-99CEF24C9265}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{97A4E9F2-C08C-46DE-AC6F-99CEF24C9265}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF68E639-F259-4C25-82DE-C7CF26078D0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF68E639-F259-4C25-82DE-C7CF26078D0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF68E639-F259-4C25-82DE-C7CF26078D0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF68E639-F259-4C25-82DE-C7CF26078D0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EF2C1A0-8721-41C5-B382-FEC4192DE601}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EF2C1A0-8721-41C5-B382-FEC4192DE601}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EF2C1A0-8721-41C5-B382-FEC4192DE601}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EF2C1A0-8721-41C5-B382-FEC4192DE601}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
