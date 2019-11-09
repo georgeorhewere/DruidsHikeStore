@@ -8,21 +8,23 @@ namespace StoreDB
 {
    public class UserManager : IUser
     {
-        readonly StoreDB.DB.StoreDBContext _context;
+        StoreDB.DB.StoreDBContext _context;
 
         public UserManager(StoreDB.DB.StoreDBContext context)
         {
             this._context = context;
         }
 
-        public void Add(User user)
+        public int Add(User user)
         {
             try
             {
                 _context.Add(user);
                 _context.SaveChanges();
+                return user.UserId;
             }
             catch (Exception ed) {
+                return -1;
             }
 
         }        

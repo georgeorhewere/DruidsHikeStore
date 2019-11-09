@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StoreDB.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,7 +14,8 @@ namespace StoreDB.DB
         }
 
         public DbSet<User> Users { get; set; }
-
+        public DbSet<Product> Products { get; set; }
+ 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<StoreDB.User>().HasData(
@@ -23,6 +25,12 @@ namespace StoreDB.DB
                 new StoreDB.User("Sam", "Etto", "sametto@gmail.com") { UserId = 4 }
                 , new StoreDB.User("Adam", "Sandler", "adamsandler@gmail.com") { UserId = 5 }
                 , new StoreDB.User("Olivia", "stone", "oliviastone@gmail.com") { UserId = 6 });
+
+            modelBuilder.Entity<Product>().HasData(
+                new Product("Rain Coats", "Hiking Coveralls", 90.34, 5, 1, "red") { ProductId = 1 },
+                new Product("Galoshed", "Hiking Boots", 40.00, 5, 1, "red") { ProductId =2 }
+                );
+
             }
 
         }

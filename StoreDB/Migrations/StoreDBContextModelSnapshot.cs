@@ -78,6 +78,9 @@ namespace StoreDB.Migrations
                             LastName = "stone"
                         });
                 });
+
+
+
 #pragma warning restore 612, 618
         }
     }

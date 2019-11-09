@@ -8,7 +8,7 @@ namespace StoreDB.Repository
     {
         IEnumerable<TEntity> GetAll();
         TEntity Get(long id);
-        void Add(TEntity entity);
+        int Add(TEntity entity);
         void Update(TEntity dbEntity, TEntity entity);
         void Delete(TEntity entity);
     }

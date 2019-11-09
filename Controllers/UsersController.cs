@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StoreDB;
 
 namespace DruidsHikeStore.Controllers
 {
@@ -14,23 +15,29 @@ namespace DruidsHikeStore.Controllers
     public class UsersController : ControllerBase
     {
 
-        private StoreDB.Repository.IUser _userService;
-        public UsersController(StoreDB.Repository.IUser userService)
+        private StoreDB.Repository.IDataRepository<User> _userService;
+        public UsersController(StoreDB.IStoreManager service)
         {
-            _userService = userService;
+            _userService = service.UserManager;
         }
         // GET: api/Users
         [EnableCors("_myAllowSpecificOrigins")]
         [HttpGet]
         public IEnumerable<StoreDB.User> Get()
         {
-            return _userService.GetAll().Select(a => a).ToList();
+            try {
+                return _userService.GetAll().Select(a => a).ToList();
+            }
+            catch(Exception e)
+            {
+                return null;
+            }
         }
 
         // GET: api/Users/5
         [EnableCors("_myAllowSpecificOrigins")]
         [HttpGet("{id}", Name = "Get")]
-        public StoreDB.User Get(int id)
+        public ActionResult<User> Get(int id)
         {
             return _userService.Get(id);
         }

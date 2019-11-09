@@ -33,19 +33,19 @@ namespace DruidsHikeStore
             services.AddDbContext<StoreDB.DB.StoreDBContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<StoreDB.Repository.IUser, StoreDB.UserManager>();
+            services.AddScoped<StoreDB.IStoreManager, StoreDB.StoreManager>();
             services.AddCors(options =>
             {
                 options.AddPolicy(MyAllowSpecificOrigins,
                 builder =>
                 {
                     builder
-                    .AllowAnyOrigin()
-                    
+                    .AllowAnyOrigin()                    
                     .AllowAnyHeader()
                     .AllowAnyMethod();
                 });
             });
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
 
@@ -64,12 +64,13 @@ namespace DruidsHikeStore
                 app.UseHsts();
             }
 
-            app.UseCors(MyAllowSpecificOrigins);
             app.UseHttpsRedirection();
+            app.UseCors(MyAllowSpecificOrigins);            
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<StoreDB.DB.StoreDBContext>();
-                context.Database.Migrate();
+                
+                context.Database.EnsureCreated();
             }
             app.UseMvc();
         }

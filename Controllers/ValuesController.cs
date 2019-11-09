@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using StoreDB;
 
 namespace DruidsHikeStore.Controllers
 {
@@ -10,10 +11,11 @@ namespace DruidsHikeStore.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private StoreDB.Repository.IUser _userService;
-        public ValuesController(StoreDB.Repository.IUser userService)
+        private StoreDB.Repository.IDataRepository<User> _userService;
+        public ValuesController(StoreDB.IStoreManager service)
         {
-            _userService = userService;
+
+            _userService = service.UserManager;
         }
         // GET api/values
         [HttpGet]
