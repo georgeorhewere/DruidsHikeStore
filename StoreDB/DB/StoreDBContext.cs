@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using StoreDB.Models;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace StoreDB.DB
 {
-    public class StoreDBContext:DbContext
+    public class StoreDBContext: IdentityDbContext<StoreUser>
     {
         public StoreDBContext(DbContextOptions<StoreDBContext> options)
                             : base(options)
@@ -18,6 +19,8 @@ namespace StoreDB.DB
  
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<StoreDB.User>().HasData(
                 new StoreDB.User("Kenny", "Rogers", "kennyrg@gmail.com") {  UserId = 1},
                 new StoreDB.User("Barry", "White", "barryr@gmail.com") { UserId = 2 },
