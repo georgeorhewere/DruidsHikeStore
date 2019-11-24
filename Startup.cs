@@ -36,7 +36,7 @@ namespace DruidsHikeStore
             // Add framework services.
             services.AddDbContext<StoreDB.DB.StoreDBContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
-              b => b.MigrationsAssembly("StoreDB")
+              b => b.MigrationsAssembly("DruidsHikeStore")
 
 
             ));

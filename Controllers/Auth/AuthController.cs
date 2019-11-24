@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using StoreDB.ViewModels.ServiceResult;
 
 namespace DruidsHikeStore.Controllers.Auth
 {
@@ -22,8 +24,8 @@ namespace DruidsHikeStore.Controllers.Auth
 
 
 
-        [HttpPost("register", Name ="Register")]
-        public async Task<ActionResult<Boolean>> Register([FromBody] StoreDB.ViewModels.AddUserViewModel value)
+        [HttpPost("register", Name = "Register")]
+        public async Task<ActionResult<StoreDB.ViewModels.ServiceResult.ServiceResultViewModel>> Register([FromBody] StoreDB.ViewModels.AddUserViewModel value)
         {
             if (ModelState.IsValid)
             {
@@ -37,19 +39,29 @@ namespace DruidsHikeStore.Controllers.Auth
                     City = value.City,
                     Country = value.Country
                 };
+
                 try
                 {
                     var result = await _userManager.CreateAsync(storeUser, value.Password);
-
-                    return result.Succeeded;
+                    //add current claim
+                    if (result.Succeeded)
+                    {
+                        var claim = new Claim("role",value.Role.ToString());
+                        await _userManager.AddClaimAsync(storeUser, claim);                        
+                    }
+                    return new ServiceResultViewModel(result.Succeeded, result);
                 }
-                catch (Exception ec) {
-                    return false;
+                catch (Exception ec)
+                {
+                    return new ServiceResultViewModel(false, ec);
                 }
             }
-            return false;
+            else
+            {
+                return new ServiceResultViewModel(false, new { Message = "Invalid Model" });
+            }           
 
         }
     }
-        
+
 }
