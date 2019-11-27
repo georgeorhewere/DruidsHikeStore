@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using DruidsHikeStore.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -22,8 +24,14 @@ namespace DruidsHikeStore
     {
         public Startup(IConfiguration configuration)
         {
-            
-            Configuration = configuration;
+            var configBuilder = new ConfigurationBuilder()
+                        .SetBasePath(Directory.GetCurrentDirectory())
+                            .AddJsonFile("appsettings.json", optional: true);
+            var config = configBuilder.Build();
+
+
+            Configuration = config;
+           
         }
 
         public IConfiguration Configuration { get; }
@@ -40,12 +48,20 @@ namespace DruidsHikeStore
 
 
             ));
-
-            services.AddIdentity<StoreUser, IdentityRole>(options =>
-                                options.Password.RequiredLength = 10)
+            services.AddIdentity<StoreUser, IdentityRole>(options => {
+                options.Password.RequiredLength = 6;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.SignIn.RequireConfirmedEmail = true;
+                }
+                                )
                 .AddEntityFrameworkStores<StoreDB.DB.StoreDBContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
 
 
             services.AddScoped<StoreDB.IStoreManager, StoreDB.StoreManager>();
@@ -60,7 +76,8 @@ namespace DruidsHikeStore
                     .AllowAnyMethod();
                 });
             });
-            
+           
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
 
