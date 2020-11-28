@@ -76,7 +76,15 @@ namespace DruidsHikeStore
                     .AllowAnyMethod();
                 });
             });
-           
+
+            services.AddAuthentication().AddTwitter(twitterOptions =>
+            {
+                twitterOptions.ConsumerKey = Configuration["TwitterConfig:API_KEY"];
+                twitterOptions.ConsumerSecret = Configuration["TwitterConfig:API_SECRET"];
+            }
+            
+
+                );
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
